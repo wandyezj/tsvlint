@@ -1,1 +1,1 @@
-cargo run "data/data/json" "data/data/tsv" 1 2 "look a string"
+cargo run "data/data.json" "data/data.tsv"

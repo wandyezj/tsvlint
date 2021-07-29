@@ -1,9 +1,10 @@
+// global allow for dead code to ignore warnings, while developing test functions.
+#![allow(dead_code)]
+
 //use std::env;
 use std::io::prelude::*;
 
-
-fn read_arguments() {
-
+fn command_line_arguments_read() {
     // basic output
     println!("Hello, world!");
 
@@ -11,6 +12,22 @@ fn read_arguments() {
     for argument in std::env::args() {
         println!("->{}", argument);
     }
+}
+
+fn command_line_arguments_individual() {
+    // get individual command line arguments distinguished by position
+    let mut arguments = std::env::args();
+    let total_arguments = arguments.len();
+
+    if total_arguments == 2 {
+        println!("correct number of arguments [{}]", total_arguments);
+    }
+
+    let one = arguments.nth(0).unwrap();
+    let two = arguments.nth(1).unwrap();
+
+    println!("one [{}]", one);
+    println!("two [{}]", two);
 }
 
 fn read_file_data() {
@@ -24,7 +41,6 @@ fn read_file_tsv() {
     // read a tsv file go through line by line value by value
 
     //https://doc.rust-lang.org/std/io/trait.BufRead.html
-
 
     // open the file
     let file_path = String::from("data/data.tsv");
@@ -49,13 +65,11 @@ fn read_file_tsv() {
 
         println!();
     }
-
 }
 
 // https://github.com/serde-rs/json
 // https://docs.serde.rs/serde_json/index.html
 use serde::{Deserialize, Serialize};
-use serde_json::Result;
 
 #[derive(Serialize, Deserialize)]
 struct Test {
@@ -74,8 +88,22 @@ fn read_file_json() {
     println!("name: [{}]", name);
 }
 
+fn test_regex() {
+    // https://docs.rs/regex/1.5.4/regex/
+    let regex_data = String::from(r"^\d{4}-\d{2}-\d{2}$");
+    let re = regex::Regex::new(regex_data.as_str()).unwrap();
+
+    // expect true
+    let test = String::from("0000-00-00");
+    let matched = re.is_match(test.as_str());
+    println!("matched: [{}] [{}]", test, matched);
+
+    // expect false
+    let test2 = String::from("0000-00-0x");
+    let matched2 = re.is_match(test2.as_str());
+    println!("matched2: [{}] [{}]", test2, matched2);
+}
+
 fn main() {
-
-    read_file_json();
-
+    command_line_arguments_individual();
 }
