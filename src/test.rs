@@ -16,18 +16,26 @@ pub fn command_line_arguments_read() {
 
 pub fn command_line_arguments_individual() {
     // get individual command line arguments distinguished by position
-    let mut arguments = std::env::args();
-    let total_arguments = arguments.len();
+    let args:Vec<String> = std::env::args().collect();
+    let total_arguments = args.len();
 
-    if total_arguments == 2 {
+    if total_arguments == 3 {
         println!("correct number of arguments [{}]", total_arguments);
+
+        let zero = &args[0];
+        println!("zero [{}]", zero);
+
+        let one = &args[1];
+        println!("one [{}]", one);
+
+        let two = &args[2];
+        println!("two [{}]", two);
+
+    } else {
+        println!("usage: [metadata.json] [data.csv]");
     }
 
-    let one = arguments.nth(0).unwrap();
-    let two = arguments.nth(1).unwrap();
 
-    println!("one [{}]", one);
-    println!("two [{}]", two);
 }
 
 pub fn read_file_data() {
