@@ -1,6 +1,8 @@
 /*
 File to contain all test functions to show proof of concept functionality
 
+These should eventually serve as pin tests.
+
 */
 
 // global ignore dead code warnings, while developing test functions.
