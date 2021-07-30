@@ -129,20 +129,39 @@ pub fn read_file_json_simple() {
 }
 
 #[derive(Serialize, Deserialize)]
+struct ComplexJsonObject {
+    name: String,
+}
+
+#[derive(Serialize, Deserialize)]
 struct ComplexJson {
     name: String,
+    object: ComplexJsonObject,
+    array: Vec<String>,
+    object_array: Vec<ComplexJsonObject>,
 }
 
 pub fn read_file_json_complex() {
     println!("read_file_json_complex");
     let file_path = String::from("data/test/data.json");
     let f = std::fs::File::open(file_path).unwrap();
-    let v: SimpleJson = serde_json::from_reader(f).unwrap();
+    let v: ComplexJson = serde_json::from_reader(f).unwrap();
 
     // todo: error checking to ensure values are present
     let name = v.name;
 
-    println!("name: [{}]", name);
+    println!(".name [{}]", name);
+
+    let object_name = v.object.name;
+    println!(".object.name [{}]", object_name);
+
+    let array = v.array;
+    println!(".array len [{}]", array.len());
+    println!(".array join [{}]", array.join(", "));
+
+    let object_array = v.object_array;
+    println!(".object_array len [{}]", object_array.len());
+
 }
 
 

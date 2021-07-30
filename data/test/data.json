@@ -1,10 +1,10 @@
 {
     "name":"MY NAME",
     "object": {
-        "key":"value"
+        "name":"value"
     },
     "array": ["a", "b", "c"],
-    "objectArray": [
+    "object_array": [
         {
             "name": "one"
         },
