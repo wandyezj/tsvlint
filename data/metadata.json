@@ -35,6 +35,13 @@
         "word_english_lowercase": {
             "description": "q word composed only of English alphabet lowercase letters, no spaces or dashes",
             "regex": "^[a-z]+$"
+        },
+        "word_english_uppercase": {
+            "description": "q word composed only of English alphabet lowercase letters, no spaces or dashes",
+            "regex": "^[A-Z]+$"
+        },
+        "whole_less_than_10": {
+            "regex": "^[0-9]$"
         }
     }
 }
