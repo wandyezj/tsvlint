@@ -1,7 +1,7 @@
 #![allow(dead_code)]
 #![allow(unused_variables)]
 
-mod test;
+mod tests;
 mod metadata;
 mod parameters;
 mod scan;

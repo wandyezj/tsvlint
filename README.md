@@ -4,7 +4,7 @@ Lint a TSV file
 
 This project uses [Rust](https://www.rust-lang.org/) as an experiment.
 
-This is to build a cross platform exe and dll that can be bound to in other languages.
+This is to build a cross platform dependent `exe` and `dll` that can be bound to in other languages.
 
 ## Setup
 
@@ -16,4 +16,10 @@ Install Visual Studio Code Rust Extension `rust-lang.rust`
 
 ## Commands
 
-test.cmd run exe
+Run program:
+
+> test.cmd
+
+Run Tests:
+
+> cargo run test

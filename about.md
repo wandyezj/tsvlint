@@ -40,3 +40,5 @@ probably better to have a single namespace and then use versioning, if want the 
 - line has more values than metadata
 - line has fewer values than metadata
 - regex does not match value
+
+- performance on large files

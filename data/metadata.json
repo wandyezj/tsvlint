@@ -15,13 +15,16 @@
             "rule": "word_english_lowercase"
         },
         {
-            "name": "spanish"
+            "name": "spanish",
+            "rule": "word_english_lowercase"
         },
         {
-            "name": "korean"
+            "name": "korean",
+            "rule": "word_english_lowercase"
         },
         {
-            "name": "french"
+            "name": "french",
+            "rule": "word_english_lowercase"
         }
     ],
     "rules": {

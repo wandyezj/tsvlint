@@ -6,6 +6,13 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::io::BufReader;
 
+struct DataExtractor {
+
+}
+
+impl DataExtractor {
+    
+}
 
 pub fn scan_csv(metadata: Metadata, data_file_path: String) {
     // Initialize Regex
@@ -59,12 +66,16 @@ pub fn scan_csv(metadata: Metadata, data_file_path: String) {
     let mut line_number = -1;
 
     let mut lines = buffer.lines();
-    
+
+    // handle header
+    // skip header line if present
     if metadata.header.present {
         let line = lines.next();
         let data = line.unwrap().unwrap();
         println!("header");
         println!("{}", data);
+
+        // TODO: validate that specified field header lines up with actual header value
     }
 
     for line in lines {

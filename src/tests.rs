@@ -7,9 +7,10 @@ These should eventually serve as pin tests.
 
 // global ignore dead code warnings, while developing test functions.
 #![allow(dead_code)]
+#![allow(unused_imports)]
+#[cfg(test)]
 
-
-
+#[test]
 pub fn command_line_arguments_read() {
     // basic output
     println!("Hello, world!");
@@ -20,7 +21,7 @@ pub fn command_line_arguments_read() {
     }
 }
 
-
+#[test]
 pub fn command_line_arguments_individual() {
     // get individual command line arguments distinguished by position
     let args:Vec<String> = std::env::args().collect();
@@ -44,7 +45,7 @@ pub fn command_line_arguments_individual() {
 
 
 }
-
+#[test]
 pub fn read_file_data() {
     // data.txt
     /*
@@ -62,6 +63,7 @@ From Data
 // for the buffer.lines()
 use std::io::prelude::*;
 
+#[test]
 pub fn read_file_tsv() {
     // read a tsv file go through line by line value by value
 
@@ -109,7 +111,7 @@ use serde::{Deserialize, Serialize};
 struct SimpleJson {
     name: String,
 }
-
+#[test]
 pub fn read_file_json_simple() {
     // simple-data.json
     /*
@@ -142,7 +144,7 @@ struct ComplexJson {
     array: Vec<String>,
     object_array: Vec<ComplexJsonObject>,
 }
-
+#[test]
 pub fn read_file_json_complex() {
     println!("read_file_json_complex");
     let file_path = String::from("data/test/data.json");
@@ -173,7 +175,7 @@ pub fn read_file_json_complex() {
 }
 
 
-
+#[test]
 pub fn test_regex() {
     // https://docs.rs/regex/1.5.4/regex/
     let regex_data = String::from(r"^\d{4}-\d{2}-\d{2}$");
@@ -183,10 +185,12 @@ pub fn test_regex() {
     let test = String::from("0000-00-00");
     let matched = re.is_match(test.as_str());
     println!("matched: [{}] [{}]", test, matched);
+    assert_eq!(matched, true);
 
     // expect false
     let test2 = String::from("0000-00-0x");
     let matched2 = re.is_match(test2.as_str());
     println!("matched2: [{}] [{}]", test2, matched2);
+    assert_eq!(matched2, false);
 }
 
