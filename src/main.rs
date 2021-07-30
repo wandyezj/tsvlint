@@ -143,7 +143,7 @@ fn scan_csv(metadata: Metadata, data_file_path: String) {
             values.push(value.to_string());
         }
 
-        // check for correct number of values
+        // ensure line has correct number of values according to metadata
         let values_count = values.len();
         if values_count != expected_value_count {
             // TODO: collect information for log
@@ -154,6 +154,7 @@ fn scan_csv(metadata: Metadata, data_file_path: String) {
             continue;
         }
 
+        // value
         for field_number in 0..values_count {
             let value = values.get(field_number).unwrap();
             let re = fields_regex.get(field_number).unwrap();
@@ -175,12 +176,6 @@ fn scan_csv(metadata: Metadata, data_file_path: String) {
             }
         }
     }
-
-    // line
-
-    // ensure line has correct number of values according to metadata
-
-    // value
 }
 
 fn main() {
