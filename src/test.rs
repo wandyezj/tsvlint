@@ -131,6 +131,8 @@ pub fn read_file_json_simple() {
 #[derive(Serialize, Deserialize)]
 struct ComplexJsonObject {
     name: String,
+    // https://doc.rust-lang.org/std/option/
+    description: Option<String>,
 }
 
 #[derive(Serialize, Deserialize)]
@@ -149,11 +151,17 @@ pub fn read_file_json_complex() {
 
     // todo: error checking to ensure values are present
     let name = v.name;
-
     println!(".name [{}]", name);
 
     let object_name = v.object.name;
+
+    let object_description = v.object.description;
+    let object_description_is_none = object_description.is_some();// .is_none();
+    let object_description_string = object_description.unwrap_or(String::new()); // give a default value
     println!(".object.name [{}]", object_name);
+    println!(".object.description is_none [{}]", object_description_is_none);
+    println!(".object.description [{}]", object_description_string);
+    
 
     let array = v.array;
     println!(".array len [{}]", array.len());

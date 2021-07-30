@@ -6,7 +6,8 @@
     "array": ["a", "b", "c"],
     "object_array": [
         {
-            "name": "one"
+            "name": "one",
+            "description":"look a description!"
         },
         {
             "name": "two"

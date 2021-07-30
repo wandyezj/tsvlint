@@ -1,13 +1,20 @@
 {
     "name":"data.tsv",
     "description": "translation of numbers into other languages",
+
+    "header": {
+        "present":true
+    },
+
     "fields": [
         {
             "name":"number",
-            "description": "the number"
+            "description": "a whole number with no leading zeroes",
+            "rule": "whole"
         },
         {
-            "name":"english"
+            "name":"english",
+            "rule":"english_lowercase"
         },
         {
             "name":"spanish"
@@ -18,5 +25,14 @@
         {
             "name":"french"
         }
-    ]
+    ],
+
+    "rules": {
+        "whole": {
+            "regex":"^([0-9]|[1-9][0-9]+)$"
+        },
+        "english_lowercase":{
+            "regex":"^[a-z]+$"
+        }
+    }
 }
