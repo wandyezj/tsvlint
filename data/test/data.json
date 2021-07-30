@@ -1,0 +1,15 @@
+{
+    "name":"MY NAME",
+    "object": {
+        "key":"value"
+    },
+    "array": ["a", "b", "c"],
+    "objectArray": [
+        {
+            "name": "one"
+        },
+        {
+            "name": "two"
+        }
+    ]
+}

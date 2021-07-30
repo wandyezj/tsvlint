@@ -1,3 +1,8 @@
+/*
+File to contain all test functions to show proof of concept functionality
+
+*/
+
 // global ignore dead code warnings, while developing test functions.
 #![allow(dead_code)]
 
@@ -39,8 +44,15 @@ pub fn command_line_arguments_individual() {
 }
 
 pub fn read_file_data() {
+    // data.txt
+    /*
+Hello World!
+
+From Data
+*/
+
     // read all data from a file
-    let data = std::fs::read_to_string("data/data.txt");
+    let data = std::fs::read_to_string("data/test/data.txt");
     let value = data.unwrap();
     println!("{}", value);
 }
@@ -53,8 +65,17 @@ pub fn read_file_tsv() {
 
     //https://doc.rust-lang.org/std/io/trait.BufRead.html
 
+    // data.tsv
+    /*
+one	two	three
+1	2	3
+uno	dos	tres
+hannah	dul	set
+un	deux	trois
+    */
+
     // open the file
-    let file_path = String::from("data/data.tsv");
+    let file_path = String::from("data/test/data.tsv");
     println!("{}", file_path);
     let f = std::fs::File::open(file_path).unwrap();
 
@@ -83,21 +104,46 @@ pub fn read_file_tsv() {
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
-struct Test {
+struct SimpleJson {
     name: String,
 }
 
-pub fn read_file_json() {
+pub fn read_file_json_simple() {
+    // simple-data.json
+    /*
+{
+    "name":"MY NAME"
+}
+    */
     println!("read_file_json");
-    let file_path = String::from("data/data.json");
+    let file_path = String::from("data/test/simple-data.json");
     let f = std::fs::File::open(file_path).unwrap();
-    let v: Test = serde_json::from_reader(f).unwrap();
+    let v: SimpleJson = serde_json::from_reader(f).unwrap();
 
     // todo: error checking to ensure values are present
     let name = v.name;
 
     println!("name: [{}]", name);
 }
+
+#[derive(Serialize, Deserialize)]
+struct ComplexJson {
+    name: String,
+}
+
+pub fn read_file_json_complex() {
+    println!("read_file_json_complex");
+    let file_path = String::from("data/test/data.json");
+    let f = std::fs::File::open(file_path).unwrap();
+    let v: SimpleJson = serde_json::from_reader(f).unwrap();
+
+    // todo: error checking to ensure values are present
+    let name = v.name;
+
+    println!("name: [{}]", name);
+}
+
+
 
 pub fn test_regex() {
     // https://docs.rs/regex/1.5.4/regex/

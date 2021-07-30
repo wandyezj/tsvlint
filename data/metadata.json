@@ -1,0 +1,22 @@
+{
+    "name":"data.tsv",
+    "description": "translation of numbers into other languages",
+    "fields": [
+        {
+            "name":"number",
+            "description": "the number"
+        },
+        {
+            "name":"english"
+        },
+        {
+            "name":"spanish"
+        },
+        {
+            "name":"korean"
+        },
+        {
+            "name":"french"
+        }
+    ]
+}
