@@ -27,3 +27,6 @@ Report line number of lines with not enough values
 Suggest built in regex types based off scan? Able to generate metadata from simply looking at data? Able to assemble regex types based off scan?
 
 TSV must not have blank lines
+
+
+probably better to have a single namespace and then use versioning, if want the new built in rules then need to version appropriately
