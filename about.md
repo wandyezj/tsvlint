@@ -30,3 +30,13 @@ TSV must not have blank lines
 
 
 probably better to have a single namespace and then use versioning, if want the new built in rules then need to version appropriately
+
+## Test Cases
+
+- empty file
+- only header present
+- header has more values than metadata
+- header has fewer values than metadata
+- line has more values than metadata
+- line has fewer values than metadata
+- regex does not match value
