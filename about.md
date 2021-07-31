@@ -35,6 +35,8 @@ can have a generic test for each column to see if it can be easily converted to 
 
 ## Test Cases
 
+enable running scan without file so can have built in test cases.
+
 - empty file
 - only header present
 - header has more values than metadata

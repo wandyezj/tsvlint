@@ -9,7 +9,6 @@ These should eventually serve as pin tests.
 #![allow(dead_code)]
 #![allow(unused_imports)]
 #[cfg(test)]
-
 #[test]
 pub fn command_line_arguments_read() {
     // basic output
@@ -24,7 +23,7 @@ pub fn command_line_arguments_read() {
 #[test]
 pub fn command_line_arguments_individual() {
     // get individual command line arguments distinguished by position
-    let args:Vec<String> = std::env::args().collect();
+    let args: Vec<String> = std::env::args().collect();
     let total_arguments = args.len();
 
     if total_arguments == 3 {
@@ -38,21 +37,18 @@ pub fn command_line_arguments_individual() {
 
         let two = &args[2];
         println!("two [{}]", two);
-
     } else {
         println!("usage: [metadata.json] [data.csv]");
     }
-
-
 }
 #[test]
 pub fn read_file_data() {
     // data.txt
     /*
-Hello World!
+    Hello World!
 
-From Data
-*/
+    From Data
+    */
 
     // read all data from a file
     let data = std::fs::read_to_string("data/test/data.txt");
@@ -63,20 +59,20 @@ From Data
 // for the buffer.lines()
 use std::io::prelude::*;
 
-#[test]
-pub fn read_file_tsv() {
-    // read a tsv file go through line by line value by value
-
-    //https://doc.rust-lang.org/std/io/trait.BufRead.html
-
-    // data.tsv
-    /*
+// data.tsv
+/*
 one	two	three
 1	2	3
 uno	dos	tres
 hannah	dul	set
 un	deux	trois
-    */
+*/
+
+#[test]
+pub fn read_file_tsv() {
+    // read a tsv file go through line by line value by value
+
+    //https://doc.rust-lang.org/std/io/trait.BufRead.html
 
     // open the file
     let file_path = String::from("data/test/data.tsv");
@@ -111,14 +107,16 @@ use serde::{Deserialize, Serialize};
 struct SimpleJson {
     name: String,
 }
-#[test]
-pub fn read_file_json_simple() {
-    // simple-data.json
-    /*
+
+// simple-data.json
+/*
 {
     "name":"MY NAME"
 }
     */
+
+#[test]
+pub fn read_file_json_simple() {
     println!("read_file_json");
     let file_path = String::from("data/test/simple-data.json");
     let f = std::fs::File::open(file_path).unwrap();
@@ -158,12 +156,14 @@ pub fn read_file_json_complex() {
     let object_name = v.object.name;
 
     let object_description = v.object.description;
-    let object_description_is_none = object_description.is_some();// .is_none();
+    let object_description_is_none = object_description.is_some(); // .is_none();
     let object_description_string = object_description.unwrap_or(String::new()); // give a default value
     println!(".object.name [{}]", object_name);
-    println!(".object.description is_none [{}]", object_description_is_none);
+    println!(
+        ".object.description is_none [{}]",
+        object_description_is_none
+    );
     println!(".object.description [{}]", object_description_string);
-    
 
     let array = v.array;
     println!(".array len [{}]", array.len());
@@ -171,9 +171,7 @@ pub fn read_file_json_complex() {
 
     let object_array = v.object_array;
     println!(".object_array len [{}]", object_array.len());
-
 }
-
 
 #[test]
 pub fn test_regex() {
@@ -193,4 +191,3 @@ pub fn test_regex() {
     println!("matched2: [{}] [{}]", test2, matched2);
     assert_eq!(matched2, false);
 }
-

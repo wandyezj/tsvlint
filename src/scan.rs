@@ -6,15 +6,44 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::io::BufReader;
 
-struct DataExtractor {
-
+pub trait Log {
+    fn log(&mut self, message: &String);
 }
 
-impl DataExtractor {
-    
+pub struct ScanReporter {
+    /**
+     * print when logged
+     */
+    print_log: bool,
+    messages: Vec<String>,
 }
 
-pub fn scan_csv(metadata: Metadata, data_file_path: String) {
+impl ScanReporter {
+    pub fn new(print_log: bool) -> ScanReporter {
+        ScanReporter {
+            messages: Vec::new(),
+            print_log
+        }
+    }
+
+    pub fn print(&self) {
+        for message in self.messages.iter() {
+            println!("{}",message);
+            
+        }
+    }
+}
+
+impl Log for ScanReporter {
+    fn log(&mut self, message: &String) {
+        self.messages.push(message.clone());
+        if self.print_log {
+            println!("{}", message);
+        }
+    }
+}
+
+pub fn scan_csv(metadata: Metadata, data_file_path: String, report: &mut dyn Log) {
     // Initialize Regex
     let mut rules: HashMap<String, Regex> = HashMap::new();
 
@@ -72,8 +101,10 @@ pub fn scan_csv(metadata: Metadata, data_file_path: String) {
     if metadata.header.present {
         let line = lines.next();
         let data = line.unwrap().unwrap();
-        println!("header");
-        println!("{}", data);
+        report.log(&"header".to_string());
+        report.log(&data);
+        //println!("header");
+        //println!("{}", data);
 
         // TODO: validate that specified field header lines up with actual header value
     }
@@ -94,10 +125,12 @@ pub fn scan_csv(metadata: Metadata, data_file_path: String) {
         let values_count = values.len();
         if values_count != expected_value_count {
             // TODO: collect information for log
-            println!(
+            let message = &format!(
                 "error: line [{}] has incorrect number of values [{}], expected [{}]",
                 line_number, values_count, expected_value_count
             );
+            report.log(message);
+            //println!("{}", message);
             continue;
         }
 
@@ -112,14 +145,16 @@ pub fn scan_csv(metadata: Metadata, data_file_path: String) {
 
             if !is_match {
                 //TODO: collect information for log
-                println!(
-                    "error: line [{}] field [{}] [{}] value [{}] does not match field rule [{}]",
-                    line_number + 1, /* line numbers start at 1*/
-                    field_number,
-                    fields_name.get(field_number).unwrap(),
-                    value,
-                    fields_rule.get(field_number).unwrap()
+                let message = &format!(
+                    "error: (value does not match rule) line [{line_number}] field [{field_number}] [{field_name}] rule [{field_rule}] value [{value}]",
+                    line_number = line_number + 1, /* line numbers start at 1*/
+                    field_number = field_number,
+                    field_name = fields_name.get(field_number).unwrap(),
+                    value = value,
+                    field_rule = fields_rule.get(field_number).unwrap(),
                 );
+                report.log(message);
+                //println!("{message}", message=message)
             }
         }
     }

@@ -6,13 +6,9 @@ mod metadata;
 mod parameters;
 mod scan;
 
-use crate::metadata::get_metadata;
-
-use crate::parameters::get_parameters;
-use crate::parameters::Parameters;
-
-use scan::scan_csv;
-
+use crate::metadata::{get_metadata};
+use crate::parameters::{get_parameters, Parameters};
+use scan::{ScanReporter, scan_csv};
 
 fn main() {
     let (success, args, parameters) = get_parameters();
@@ -31,5 +27,13 @@ fn main() {
 
     let metadata = get_metadata(metadata_file_path);
 
-    scan_csv(metadata, data_file_path);
+    let print_during = false;
+    let print_after = true;
+    let mut reporter = ScanReporter::new(print_during);
+    scan_csv(metadata, data_file_path, & mut reporter);
+
+    if print_after {
+        reporter.print();
+    }
+    
 }
