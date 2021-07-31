@@ -31,6 +31,8 @@ TSV must not have blank lines
 
 probably better to have a single namespace and then use versioning, if want the new built in rules then need to version appropriately
 
+can have a generic test for each column to see if it can be easily converted to CSV (simply make sure there are no commas `,` and no double quotes `"`). Can also do the same for CSV to see if it can be easily converted to TSV.
+
 ## Test Cases
 
 - empty file
