@@ -35,7 +35,7 @@ can have a generic test for each column to see if it can be easily converted to 
 
 ## Test Cases
 
-enable running scan without file so can have built in test cases.
+enable running scan without file so can have built in test cases. This should be done by simply having a line value stream into the scan function, this can then become scan, without needing to worry about how the lines and values are broken up.
 
 - empty file
 - only header present
