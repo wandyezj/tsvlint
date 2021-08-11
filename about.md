@@ -33,6 +33,13 @@ probably better to have a single namespace and then use versioning, if want the 
 
 can have a generic test for each column to see if it can be easily converted to CSV (simply make sure there are no commas `,` and no double quotes `"`). Can also do the same for CSV to see if it can be easily converted to TSV.
 
+Generate commands to import into a sqlite database, generate the table. Will need to be able to specify concentrations of types.
+
+Need a generic iterator that can be passed to the scanner that can iterate by row and then by value. That way different file formats can be supported.
+
+Simpler to simply specify a delimiter and the format supported and to not allow double quote `"` perhaps simply ban this character all together. Weird because of non uniform standard for handling and escaping text in CSV.
+
+
 ## Test Cases
 
 enable running scan without file so can have built in test cases. This should be done by simply having a line value stream into the scan function, this can then become scan, without needing to worry about how the lines and values are broken up.
